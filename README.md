@@ -51,3 +51,54 @@ Docker version xx.xx.x, build xxxxxxx
 # tests/ 하위의 테스트 파일로 테스트를 시작합니다.
 "test": "mocha -r ts-node/register tests/**/*.spec.ts"
 ```
+
+## 요청 테스트
+
+도커를 통해 컨테이너를 띄우면 서버에 요청을 보내 응답을 받을 수 있습니다.
+
+### 1. 유저 등록
+
+#### 1.1 endpoint
+
+`POST /api/v1/users`
+
+#### 1.2 headers
+
+| 이름         | 값               |
+| ------------ | ---------------- |
+| Content-Type | application/json |
+
+#### 1.3 body
+
+| 이름 | 설명 | 타입    |
+| ---- | ---- | ------- |
+| name | 이름 | string  |
+| age  | 나이 | integer |
+
+#### 1.4 example
+
+```shell
+# 요청
+curl -POST localhost:3000/api/v1/users \
+-H 'Content-Type: application/json' \
+-d '{"name":"eman", "age":17}'
+
+# 응답
+{"id":2,"name":"eman","age":17,"updatedAt":"2019-11-10T09:53:14.776Z","createdAt":"2019-11-10T09:53:14.776Z"}
+```
+
+### 2. 유저 조회
+
+#### 2.1 endpoint
+
+`GET /api/v1/users/{id}`
+
+#### 2.2 example
+
+```shell
+# 요청
+curl -GET localhost:3000/api/v1/users/2
+
+# 응답
+{"id":2,"name":"eman","age":17,"createdAt":"2019-11-10T09:53:14.000Z","updatedAt":"2019-11-10T09:53:14.000Z"}
+```
