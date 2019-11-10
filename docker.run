@@ -1,0 +1,28 @@
+#!/bin/bash
+
+OPERATION=$1
+shift
+
+case $OPERATION in
+--start)
+  echo "도커 컨테이너 시작 중..."
+  docker-compose -f docker-compose.dev.yml up -d $@
+  ;;
+--stop)
+  echo "도커 컨테이너 철수 중..."
+  docker-compose -f docker-compose.dev.yml down $@
+  ;;
+--restart)
+  echo "도커 컨테이너 재시작 중..."
+  docker-compose -f docker-compose.dev.yml restart $@
+  ;;
+--logs)
+  echo docker-compose -f docker-compose.dev.yml logs $@
+  docker-compose -f docker-compose.dev.yml logs $@
+  ;;
+*)
+  echo --start, --stop, --restart 중 하나의 옵션이 전달되어야합니다.
+  ;;
+esac
+
+echo "완료."
