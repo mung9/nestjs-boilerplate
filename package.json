@@ -45,10 +45,6 @@
     "typescript": "^3.7.2"
   },
   "scripts": {
-    "tsc": "tsc",
-    "start:build": "tsc -w",
-    "start:run": "nodemon dist/main.js -L",
-    "start-tmp1": "concurrently npm:start:*",
     "start": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'node_modules/.bin/ts-node' src/main.ts",
     "lint": "tsc --noEmit && eslint \"**/*.{js,ts}\" --quiet --fix",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts"
