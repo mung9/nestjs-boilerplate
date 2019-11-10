@@ -14,6 +14,7 @@ import { AddUserDto } from "../dto";
 import { UserService } from "../services/user";
 import { AuthGuard } from "../guards/auth";
 import { User } from "../database/models/User";
+import { validationPipeOptions } from "../validations";
 
 @Controller("/users")
 export class UserController {
@@ -26,7 +27,7 @@ export class UserController {
   }
 
   @Post("/")
-  @UsePipes(ValidationPipe)
+  @UsePipes(new ValidationPipe(validationPipeOptions.addUser))
   public async addUser(@Body() addUserDto: AddUserDto): Promise<User> {
     const createdUser = await this.userService.addUser(addUserDto);
     return createdUser;
